@@ -11,7 +11,9 @@ app.jinja_env.filters['zip'] = zip
 @app.route("/")
 def home_view():
 
-        return render_template('index.html.j2')
+    print("hello world")
+
+    return render_template('index.html.j2')
 
 
 
