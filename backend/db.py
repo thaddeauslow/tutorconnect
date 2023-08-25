@@ -14,13 +14,3 @@ def get_db():
     mongo_db=client["tutorConnect"]
 
     return mongo_db
-
-if __name__ == "__main__":
-    dbObj = get_db()
-    myDoc = dbObj["user"]
-    
-    query = {"user": "user1"}
-    queryA = myDoc.find(query)
-
-    for i in queryA:
-        print(i["user"])

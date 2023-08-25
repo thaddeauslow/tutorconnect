@@ -1,10 +1,17 @@
-from flask import Flask
+from logging import error
+from flask import Flask, jsonify, request, render_template
+
+
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return "Hello, world!"
+app.jinja_env.filters['zip'] = zip
 
-if __name__ == "__main__":
-    app.run()
+#control panel
+@app.route("/")
+def home_view():
+
+        return render_template('index.html.j2')
+
+
+
