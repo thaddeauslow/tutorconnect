@@ -1,6 +1,32 @@
 
-<body style = "background-color: aqua;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href = "{{ url_for('static' , filename = 'index.css')}}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src = "{{url_for('static' , filename= 'index.js')}}"></script>  
+  <title>Admin@TC</title>
+</head>
+<body>
+ <div id = "login-page"> 
+    <div class="login-container">
+        <div class = "flex-left">
+            <h1 id = "textTest">Login as Admin User</h1>
+        </div>
+        <form class="login-form" id = "loginForm">
+            <input type="text" id="email" name="username" placeholder="johndoe@xyz.com" required>
+            <input type="password" id="password" name="password" placeholder="*********" required>
+            
+            <button type="submit" id = "button">LOGIN</button>
 
-    <p>Hello World</p>
-
+            <p id = "notFound"></p>
+        </form>
+    </div>
+    <div class = "login-container">
+        <img src="{{ url_for('static', filename='img/AdminLogin.png') }}" alt="Admin Image">
+    </div>
+  </div> 
 </body>
+</html>
