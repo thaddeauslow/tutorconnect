@@ -38,6 +38,15 @@ def register():
         sResponse = userCol.new_user(query)
         
         return sResponse
+    
+@app.route("/catalogue", methods=['POST'], strict_slashes=False)
+def catalogue():
+    if request.method == 'POST':
+
+        serviceCol = mongo("service")
+        sResponse = serviceCol.retrieveCollection()
+
+        return jsonify(sResponse)
 
 
 
