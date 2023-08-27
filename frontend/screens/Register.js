@@ -15,6 +15,46 @@ export default function Register({ navigation }) {
   const [isEnabled2, setIsEnabled2] = useState(false);
   const toggleSwitch1 = () => setIsEnabled1((previousState) => !previousState);
   const toggleSwitch2 = () => setIsEnabled2((previousState) => !previousState);
+    
+  const redirect = async(res) => {
+        const item = JSON.parse(res) 
+        if (Object.keys(item)[0] === "success") {
+            navigation.navigate('Catalogue')
+        }
+        else {
+            //set text to error json
+            console.log("error")
+        }
+    }
+    //email
+    const [email, setEmail] = useState("");
+    //password
+    const [password, setPassword] = useState("");
+    //checkpassword
+    const [checkPassword, setCheckpassword] = useState("");
+
+    const userData = {"email": email, "password": password, "role": "student"}
+
+    const submitNewUser = async() => {
+        fetch("https://tutor-connect-5542469f5e53.herokuapp.com/register", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+            method: "POST",
+            body: JSON.stringify(userData)
+        })
+        .then(response=>response.text())
+        .then(res => {
+            redirect(res)
+        //function to handle results
+        })
+        .catch(error =>{
+        console.error(error.message)
+        })
+        }
+
+
   return (
     <ImageBackground
       source={require("../assets/Register/bg.png")}
@@ -36,6 +76,7 @@ export default function Register({ navigation }) {
             style={styles.username}
             placeholder="Enter your email"
             placeholderTextColor="rgb(163, 133, 115)"
+            onChangeText={newEmail => setEmail(newEmail)}
           />
         </View>
 
@@ -48,6 +89,7 @@ export default function Register({ navigation }) {
             style={styles.text}
             placeholder="Enter your password"
             placeholderTextColor="rgb(163, 133, 115)"
+            onChangeText={newPassword => setPassword(newPassword)}
           />
         </View>
 
@@ -60,13 +102,14 @@ export default function Register({ navigation }) {
             style={styles.text}
             placeholder="Confirm password"
             placeholderTextColor="rgb(163, 133, 115)"
+            onChangeText={checkPassword => setCheckpassword(checkPassword)}
           />
         </View>
 
         <View>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("Flamingo")}
+            onPress={submitNewUser}
           >
             <Image
               style={styles.loginButton}
