@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import SearchBar from './components/SearchBar'; // Adjust the import path based on your project structure
+import SearchBar from './SearchBar'; // Adjust the import path based on your project structure
 
 
 const Catalogue = () => {
