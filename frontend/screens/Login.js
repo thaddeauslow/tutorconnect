@@ -13,6 +13,39 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Login({ navigation }) {
+
+    //email
+    const [email, setEmail] = React.useState("");
+    //password
+    const [password, setPassword] = React.useState("");
+
+    const userData = {"email": email, "password": password}
+
+
+    const submitUser = () => {
+        fetch("https://tutor-connect-5542469f5e53.herokuapp.com/authentication", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            method: "POST",
+            body: JSON.stringify(userData)
+        })
+        .then(response=>response.text())
+        .then(res => {
+            const item = JSON.parse(res) 
+            if (Object.keys(item)[0] === "success") {
+                navigation.navigate('Catalogue');
+            }
+        //function to handle results
+        //if success enter to personalisation page with name json
+        })
+        .catch(error =>{
+        console.error(error.message)
+        })
+    }
+  
+
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
@@ -36,6 +69,7 @@ export default function Login({ navigation }) {
             style={styles.username}
             placeholder="Username"
             placeholderTextColor="rgb(163, 133, 115)"
+            onChangeText={newEmail => setEmail(newEmail)}
           />
         </View>
 
@@ -48,6 +82,7 @@ export default function Login({ navigation }) {
             style={styles.password}
             placeholder="Password"
             placeholderTextColor="rgb(163, 133, 115)"
+            onChangeText={newPassword => setPassword(newPassword)}
           />
         </View>
 
@@ -66,7 +101,7 @@ export default function Login({ navigation }) {
         <View>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("ChooseDinosaur")}
+            onPress={submitUser}
           >
             <Image
               style={styles.loginButton}
