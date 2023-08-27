@@ -14,6 +14,10 @@ class mongo:
         else: 
             return False
 
+    def retrieveCollection(self):
+
+        return list(self.collection.find({}, {'_id': 0}))
+
     def get_user(self, query):
         email = query["email"]
         password = query["password"]
@@ -43,4 +47,7 @@ class mongo:
             return {"success": "account created"}
         else:
             return {"error": "Email Address Exists"}
+        
+
+
             
