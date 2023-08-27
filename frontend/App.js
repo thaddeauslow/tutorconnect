@@ -1,11 +1,11 @@
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginRegister from "./screens/LoginRegister";
-import Register from "./screens/Register";
 import Login from "./screens/Login";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import Register from "./screens/Register";
+import Catalogue from "./screens/Catalogue";
 
 function BackButton() {
   const navigation = useNavigation();
@@ -27,16 +27,16 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator
+    <Stack.Navigator initialRouteName='LoginRegister'
       screenOptions={{
         animationEnabled: false,
         headerLeft: () => <BackButton />,
         headerStyle: {
-          backgroundColor: "#D8DCFF",
+          backgroundColor: "#BCD9E0",
         },
-        headerTintColor: "#D8DCFF",
+        headerTintColor: "#BCD9E0",
         cardStyle: {
-          backgroundColor: "#D8DCFF",
+          backgroundColor: "#BCD9E0",
         },
       }}
     >
@@ -45,8 +45,21 @@ function MyStack() {
         component={LoginRegister}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Catalogue"
+        component={Catalogue}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
