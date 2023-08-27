@@ -1,8 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import React from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginRegister from "./screens/LoginRegister";
+import Register from "./screens/Register";
+import Login from "./screens/Login";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 function BackButton() {
   const navigation = useNavigation();
@@ -29,11 +32,11 @@ function MyStack() {
         animationEnabled: false,
         headerLeft: () => <BackButton />,
         headerStyle: {
-          backgroundColor: "#BCD9E0",
+          backgroundColor: "#D8DCFF",
         },
-        headerTintColor: "#BCD9E0",
+        headerTintColor: "#D8DCFF",
         cardStyle: {
-          backgroundColor: "#BCD9E0",
+          backgroundColor: "#D8DCFF",
         },
       }}
     >
@@ -42,6 +45,8 @@ function MyStack() {
         component={LoginRegister}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );
 }
